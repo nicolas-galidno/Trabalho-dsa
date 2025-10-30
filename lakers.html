@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakers Championships - 17 Títulos da NBA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #552583 0%, #FDB927 100%);
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            padding: 4rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        header h1, header p {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: #FDB927;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.3rem;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .intro {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .intro-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .intro h2, .intro p {
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro h2 {
+            color: #FDB927;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .championships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .championship-card {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #FDB927;
+        }
+
+        .championship-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(253, 185, 39, 0.4);
+        }
+
+        .championship-card h3 {
+            color: #FDB927;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .championship-card .year {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .championship-card .details {
+            color: #ddd;
+            margin: 0.5rem 0;
+        }
+
+        .championship-card .mvp {
+            color: #FDB927;
+            font-weight: bold;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #552583;
+        }
+
+        .legends-section {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .legends-section h2 {
+            color: #FDB927;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .legends-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .legend-card {
+            background: rgba(85, 37, 131, 0.5);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .legend-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .legend-card:hover::before {
+            opacity: 0.5;
+        }
+
+        .legend-card:nth-child(1)::before {
+            background-image: url('https://cdn.nba.com/headshots/nba/latest/1040x760/600012.png');
+        }
+
+        .legend-card:nth-child(2)::before {
+            background-image: url('https://images.unsplash.com/photo-1608245449230-4ac19066d2d0?w=400&q=80');
+        }
+
+        .legend-card:nth-child(3)::before {
+            background-image: url('https://images.unsplash.com/photo-1519861531473-9200262188bf?w=400&q=80');
+        }
+
+        .legend-card:nth-child(4)::before {
+            background-image: url('https://images.unsplash.com/photo-1577223625816-7546f15ad321?w=400&q=80');
+        }
+
+        .legend-card:nth-child(5)::before {
+            background-image: url('https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?w=400&q=80');
+        }
+
+        .legend-card:nth-child(6)::before {
+            background-image: url('https://images.unsplash.com/photo-1515523110800-9415d13b84a8?w=400&q=80');
+        }
+
+        .legend-card h4, .legend-card p {
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .legend-card:hover {
+            transform: scale(1.05);
+        }
+
+        .legend-card h4 {
+            color: #FDB927;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .legend-card p {
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .stats-section {
+            background: rgba(253, 185, 39, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .stats-section h2 {
+            color: #FDB927;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-box {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .stat-box .number {
+            font-size: 3rem;
+            color: #FDB927;
+            font-weight: bold;
+        }
+
+        .stat-box .label {
+            font-size: 1rem;
+            color: #fff;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(85, 37, 131, 0.95) 100%);
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+            border-top: 4px solid #FDB927;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-section h3 {
+            color: #FDB927;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p {
+            color: #fff;
+            margin: 0.5rem 0;
+            line-height: 1.8;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            color: #ddd;
+            margin: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li:hover {
+            color: #FDB927;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons span {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icons span:hover {
+            transform: scale(1.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(253, 185, 39, 0.3);
+            color: #FDB927;
+            font-size: 1rem;
+        }
+
+        .footer-bottom p {
+            margin: 0.5rem 0;
+        }
+
+        .trophy-icon {
+            font-size: 3rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏆 LOS ANGELES LAKERS 🏆</h1>
+        <p>17 Campeonatos da NBA - Uma Dinastia Lendária</p>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <h2>A História Mais Vitoriosa da NBA</h2>
+            <p>
+                Os Los Angeles Lakers são uma das franquias mais vitoriosas e icônicas da história da NBA. 
+                Com 17 títulos conquistados (empatados com o Boston Celtics), os Lakers construíram uma 
+                dinastia que atravessa gerações, de Minneapolis a Los Angeles, com lendas como Magic Johnson, 
+                Kareem Abdul-Jabbar, Shaquille O'Neal, Kobe Bryant e LeBron James.
+            </p>
+        </div>
+
+        <div class="stats-section">
+            <h2>Estatísticas Impressionantes</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="number">17</div>
+                    <div class="label">Títulos da NBA</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">32</div>
+                    <div class="label">Finais Disputadas</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">12</div>
+                    <div class="label">MVPs das Finais</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number">75+</div>
+                    <div class="label">Anos de História</div>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; color: #FDB927; font-size: 2.5rem; margin: 3rem 0 2rem 0;">
+            🏆 Todos os Títulos dos Lakers 🏆
+        </h2>
+
+        <div class="championships-grid">
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">1949</div>
+                <h3>Minneapolis Lakers</h3>
+                <p class="details">Derrotaram: Washington Capitols (4-2)</p>
+                <p class="mvp">Era: George Mikan</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">1950</div>
+                <h3>Minneapolis Lakers</h3>
+                <p class="details">Derrotaram: Syracuse Nationals (4-2)</p>
+                <p class="mvp">Era: George Mikan</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">1952</div>
+                <h3>Minneapolis Lakers</h3>
+                <p class="details">Derrotaram: New York Knicks (4-3)</p>
+                <p class="mvp">Era: George Mikan</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">1953</div>
+                <h3>Minneapolis Lakers</h3>
+                <p class="details">Derrotaram: New York Knicks (4-1)</p>
+                <p class="mvp">Era: George Mikan</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">1954</div>
+                <h3>Minneapolis Lakers</h3>
+                <p class="details">Derrotaram: Syracuse Nationals (4-3)</p>
+                <p class="mvp">Era: George Mikan</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">1972</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: New York Knicks (4-1)</p>
+                <p class="mvp">MVP das Finais: Wilt Chamberlain</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">1980</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: Philadelphia 76ers (4-2)</p>
+                <p class="mvp">MVP das Finais: Magic Johnson</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">1982</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: Philadelphia 76ers (4-2)</p>
+                <p class="mvp">MVP das Finais: Magic Johnson</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">1985</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: Boston Celtics (4-2)</p>
+                <p class="mvp">MVP das Finais: Kareem Abdul-Jabbar</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">1987</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: Boston Celtics (4-2)</p>
+                <p class="mvp">MVP das Finais: Magic Johnson</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">1988</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: Detroit Pistons (4-3)</p>
+                <p class="mvp">MVP das Finais: James Worthy</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">2000</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: Indiana Pacers (4-2)</p>
+                <p class="mvp">MVP das Finais: Shaquille O'Neal</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">2001</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: Philadelphia 76ers (4-1)</p>
+                <p class="mvp">MVP das Finais: Shaquille O'Neal</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">2002</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: New Jersey Nets (4-0)</p>
+                <p class="mvp">MVP das Finais: Shaquille O'Neal</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">2009</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: Orlando Magic (4-1)</p>
+                <p class="mvp">MVP das Finais: Kobe Bryant</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">2010</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: Boston Celtics (4-3)</p>
+                <p class="mvp">MVP das Finais: Kobe Bryant</p>
+            </div>
+
+            <div class="championship-card">
+                <div class="trophy-icon">🏆</div>
+                <div class="year">2020</div>
+                <h3>Los Angeles Lakers</h3>
+                <p class="details">Derrotaram: Miami Heat (4-2)</p>
+                <p class="mvp">MVP das Finais: LeBron James</p>
+            </div>
+        </div>
+
+        <div class="legends-section">
+            <h2>Lendas dos Lakers</h2>
+            <div class="legends-grid">
+                <div class="legend-card">
+                    <h4>George Mikan</h4>
+                    <p>5 títulos (1949-1954)<br>Era Minneapolis</p>
+                </div>
+                <div class="legend-card">
+                    <h4>Magic Johnson</h4>
+                    <p>5 títulos (1980, 82, 85, 87, 88)<br>3x MVP das Finais</p>
+                </div>
+                <div class="legend-card">
+                    <h4>Kareem Abdul-Jabbar</h4>
+                    <p>5 títulos com Lakers<br>Maior pontuador da história</p>
+                </div>
+                <div class="legend-card">
+                    <h4>Kobe Bryant</h4>
+                    <p>5 títulos (2000, 01, 02, 09, 10)<br>2x MVP das Finais</p>
+                </div>
+                <div class="legend-card">
+                    <h4>Shaquille O'Neal</h4>
+                    <p>3 títulos (2000-2002)<br>3x MVP das Finais</p>
+                </div>
+                <div class="legend-card">
+                    <h4>LeBron James</h4>
+                    <p>1 título (2020)<br>MVP das Finais 2020</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="legends-section" style="margin-top: 3rem;">
+            <h2>🌆 Lakers & Los Angeles 🌆</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);">
+                    <img src="luca-micheli-ewspoqBfALg-unsplash (1).jpg" alt="Los Angeles" style="width: 100%; height: 250px; object-fit: cover;">
+                    <div style="background: rgba(0, 0, 0, 0.8); padding: 1.5rem; text-align: center;">
+                        <h4 style="color: #FDB927; margin-bottom: 0.5rem;">Downtown LA</h4>
+                        <p style="color: #fff;">O coração da Cidade dos Anjos</p>
+                    </div>
+                </div>
+                <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);">
+                    <img src="wmremove-transformed.jpeg" alt="Crypto.com Arena" style="width: 100%; height: 250px; object-fit: cover;">
+                    <div style="background: rgba(0, 0, 0, 0.8); padding: 1.5rem; text-align: center;">
+                        <h4 style="color: #FDB927; margin-bottom: 0.5rem;">Crypto.com Arena</h4>
+                        <p style="color: #fff;">Casa dos Lakers desde 1999</p>
+                    </div>
+                </div>
+                <div style="border-radius: 15px; overflow: hidden; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);">
+                    <img src="wmremove-transformed (1).jpeg" alt="Lakers Fans" style="width: 100%; height: 250px; object-fit: cover;">
+                    <div style="background: rgba(0, 0, 0, 0.8); padding: 1.5rem; text-align: center;">
+                        <h4 style="color: #FDB927; margin-bottom: 0.5rem;">Lakers Nation</h4>
+                        <p style="color: #fff;">A torcida mais apaixonada da NBA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🏆 Lakers Nation</h3>
+                <p>Uma das franquias mais vitoriosas da história do esporte</p>
+                <p style="color: #FDB927; font-weight: bold; margin-top: 1rem;">17 Championships</p>
+                <p>Purple & Gold Forever 💜💛</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>📊 Recordes</h3>
+                <ul>
+                    <li>17 Títulos da NBA</li>
+                    <li>32 Aparições nas Finais</li>
+                    <li>24 Hall of Famers</li>
+                    <li>Maior rivalidade: Celtics</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>⭐ Eras de Ouro</h3>
+                <ul>
+                    <li>Era Mikan (1949-1954)</li>
+                    <li>Showtime (1980-1988)</li>
+                    <li>Shaq & Kobe (2000-2002)</li>
+                    <li>Kobe Era (2009-2010)</li>
+                    <li>LeBron Era (2020)</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>🌟 Los Angeles</h3>
+                <p>Cidade dos Anjos, Cidade dos Campeões</p>
+                <div class="social-icons">
+                    <span>📱</span>
+                    <span>🏀</span>
+                    <span>📺</span>
+                    <span>💬</span>
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">Crypto.com Arena<br>Los Angeles, CA</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #FDB927;">Representando LA desde 1960</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>🏀 Los Angeles Lakers - Since 1947 🏀</p>
+            <p>"Winning Time is Anytime" | Lakers Legacy Lives Forever</p>
+            <p style="font-size: 0.85rem; color: #ddd; margin-top: 1rem;">Site criado para celebrar a história vitoriosa dos Lakers</p>
+        </div>
+    </footer>
+</body>
+</html>
