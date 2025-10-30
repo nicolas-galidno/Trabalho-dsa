@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Poppins:wght@300;400;600&display=swap');
+
+/* ======== GERAL ======== */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #552583 0%, #3a176b 100%);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ======== HEADER ======== */
+header {
+  background: linear-gradient(90deg, #FDB927, #ffca3a);
+  color: #552583;
+  text-align: center;
+  padding: 50px 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3em;
+  margin: 0;
+}
+
+header p {
+  font-size: 1.2em;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* ======== CONTEÚDO ======== */
+main {
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* ======== CARTÕES DE JOGADORES ======== */
+.player-card {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 2px solid #FDB927;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 900px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.player-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 35px rgba(255, 217, 0, 0.3);
+}
+
+.player-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  filter: brightness(80%);
+  transition: filter 0.3s;
+}
+
+.player-card:hover img {
+  filter: brightness(100%);
+}
+
+/* ======== INFORMAÇÕES ======== */
+.player-info {
+  padding: 25px;
+}
+
+.player-info h2 {
+  color: #FDB927;
+  font-size: 1.8em;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.player-info p {
+  line-height: 1.7;
+  font-size: 1.05em;
+}
+
+.stats {
+  margin-top: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 0.95em;
+}
+
+.stats span {
+  display: inline-block;
+  margin-right: 15px;
+  color: #ffcc33;
+}
+
+/* ======== RODAPÉ ======== */
+footer {
+  background-color: #3b1562;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
+  color: #d4c3ff;
+  border-top: 2px solid #FDB927;
+}
+
+footer p {
+  margin: 5px;
+}
+
+.highlight {
+  color: #ffca3a;
+  font-weight: bold;
+}
+
+/* ======== RESPONSIVIDADE ======== */
+@media (max-width: 700px) {
+  header h1 {
+    font-size: 2.2em;
+  }
+
+  .player-info h2 {
+    font-size: 1.5em;
+  }
+
+  .player-image img {
+    height: 300px;
+  }
+}

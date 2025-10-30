@@ -1,0 +1,107 @@
+
+body {
+  background: linear-gradient(180deg, #552583 0%, #3a176b 100%);
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+
+.navbar-yellow {
+  background-color: #fdd835 !important;
+}
+
+.navbar-brand span {
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: px;
+}
+
+.navbar-yellow .nav-link {
+  color: #2e2e2e !important;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.navbar-yellow .nav-link:hover {
+  color: #552583 !important;
+  text-decoration: underline;
+}
+
+
+.carousel-item img {
+  height: 500px;
+  object-fit: cover;
+  filter: brightness(90%);
+  transition: filter 0.4s ease;
+}
+
+.carousel-item:hover img {
+  filter: brightness(100%);
+}
+
+
+.text-purple {
+  color: #552583;
+}
+
+.text-yellow {
+  color: #fdd835;
+}
+
+.idol-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 15px;
+}
+
+.idol-card img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  height: 350px;
+  object-fit: cover;
+}
+
+.idol-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.contact-section {
+  background: linear-gradient(135deg, #3a176b, #552583);
+  border-top: 5px solid #fdd835;
+}
+
+.btn-yellow {
+  background-color: #fdd835;
+  color: #2e2e2e;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-yellow:hover {
+  background-color: #ffe766;
+  transform: scale(1.05);
+}
+
+footer {
+  background-color: #111;
+  font-size: 0.9rem;
+  border-top: 2px solid #fdd835;
+}
+
+#historia {
+  background: #fdfdfd;
+  border-top: 5px solid #fdd835;
+  border-bottom: 5px solid #fdd835;
+  border-radius: 0;
+  padding: 60px 20px;
+}
+
+#historia p {
+  line-height: 1.8;
+  font-size: 1.1rem;
+  color: #333;
+}
+
